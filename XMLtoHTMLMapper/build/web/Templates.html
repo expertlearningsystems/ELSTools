@@ -1,0 +1,221 @@
+<!--Text-->
+<p
+    class="/item/@classes">
+    /item
+</p>
+
+<item
+    template="text"
+    classes="limri-report-answerkey">
+    A and B = No Improvement Needed, C and D = Improvement Needed
+</item>
+<!--End Text-->
+
+
+<!--Question Summary Table New-->
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="col-xs-2 questionSummaryTableHeader" colspan="2">View on //name[1]</th>
+            <th class="col-xs-2 questionSummaryTableHeader" colspan="2">View on //name[2]</th>
+            <th class="col-xs-1 questionSummaryTableHeader" rowspan="2">SID</th>
+            <th class="col-xs-7 questionSummaryTableHeader" rowspan="2">Statement</th>
+        </tr>
+        <tr>
+            <th class="col-xs-1 questionSummaryTableSubHeader">//name[1]</th>
+            <th class="col-xs-1 questionSummaryTableSubHeader">//name[2]</th>
+            <th class="col-xs-1 questionSummaryTableSubHeader">//name[2]</th>
+            <th class="col-xs-1 questionSummaryTableSubHeader">//name[1]</th>
+        </tr>
+    </thead>
+</table>
+
+<item template="questionSummaryTable">
+    <name>Wife</name>
+    <name>Husband</name>
+</item>
+<!--End Question Summary Table New-->
+
+<!--Question Summary Table Old-->
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-xs-1 tableHeader">/item/column[@position='1']</th>
+            <th class="col-xs-1 tableHeader">/item/column[@position='2']</th>
+            <th class="col-xs-1 tableHeader">/item/column[@position='3']</th>
+            <th class="col-xs-9 tableHeader">/item/column[@position='4']</th>
+        </tr>
+    </thead>
+</table>
+
+<item classes="questionSummaryTable" subtype="header" type="table_row">
+    <column position="1">Wife</column>
+    <column position="2">Husband</column>
+    <column position="3">SID</column>
+    <column position="4">Statement</column>
+</item>
+<!--End Question Summary Table Old-->
+
+<!--Question Summary-->
+<item dependency="q329,F,M,p2_Both_Validated_Strength" sheetid="329" type="question_summary">
+    <gradetype>AgreePositive</gradetype>
+    <column source="F">
+        <grade voice="F">4</grade>
+        <grade voice="M">3</grade>
+    </column>
+    <column source="M">
+        <grade voice="M">3</grade>
+        <grade voice="F">0</grade>
+    </column>
+    <column>
+         <link sheet="S329" type="sheet">329</link>
+    </column>
+    <column>
+        I share the leadership of our family equally with my spouse.
+    </column>
+</item>
+
+<table><!--Context-->
+    <tr>
+        <td class='col-xs-1'>/item/column[@source='F']/grade[@voice='F'] /item/column[@source='F']/grade[@voice='M']</td>
+        <td class='col-xs-1'>/item/column[@source='M']/grade[@voice='M'] /item/column[@source='M']/grade[@voice='F']</td>
+        <td class='col-xs-1'><a href='/item/column/link/@sheet'>/item/column/link</a></td>
+        <td class='col-xs-9'>/item/column[4]</td>
+    </tr>
+</table><!--Context-->
+<!--End Question Summary-->
+
+
+<!--Checkbox With Images-->
+<item template="checkbox" id="checkbox1" group="group1">
+      <title>Check Box Title</title>
+      <checked>true</checked>
+</item>
+
+<div>
+    <img id="/item/@id" class="/item/@group" width="25" height="25" onclick="checkUncheckSingle($.trim(' /item/@id '))">
+         <span> /item/title</span>
+    </img>
+
+   <script>
+        var checkedImg = "http://www.clipartbest.com/cliparts/ncX/jL6/ncXjL6rcB.png";
+        var uncheckedImg = "https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/512/unchecked_checkbox.png";
+        var checked = $.trim(" /item/checked ");
+        var id = $.trim(" /item/@id ");
+        
+        if (checked === "true") {
+            $("#" + id).attr("src", checkedImg);
+            $("#" + id).attr("data-checked", "true");
+        }
+        else if (checked === "false") {
+            $("#" + id).attr("src", uncheckedImg);
+            $("#" + id).attr("data-checked", "false");
+        }
+        
+        function checkUncheckSingle(id) {
+            if ($("#" + id).attr("data-checked") === "true") {
+                $("#" + id).attr("src", uncheckedImg);
+                $("#" + id).attr("data-checked", "false");
+            }
+            else if ($("#" + id).attr("data-checked") === "false"){
+                $("#" + id).attr("src", checkedImg);
+                $("#" + id).attr("data-checked", "true");
+            }
+        }
+   </script>
+</div>
+<!--End Checkbox With Images-->
+
+
+<!--Check/Uncheck All With Images -->
+<item template="checkUncheckAll" group="group1"></item>
+
+<root><!--Context-->
+
+<div class="btn-group">
+    <button type="radio" class="btn btn-info /item/@group" onclick="checkAll($.trim(' /item/@group '))">
+        <b>Check All</b>
+    </button>
+    <button type="radio" class="btn btn-info /item/@group" onclick="uncheckAll($.trim(' /item/@group '))">
+        <b>Uncheck All</b>
+    </button>
+</div>
+    <script>
+        function checkAll(group) {
+            $("." + group).attr("src", "http://www.clipartbest.com/cliparts/ncX/jL6/ncXjL6rcB.png");
+            $("." + group).attr("data-checked", "true");
+        }
+        function uncheckAll(group) {
+            $("." + group).attr("src", "https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/512/unchecked_checkbox.png");
+            $("." + group).attr("data-checked", "false");
+        }
+        $("." + $.trim(' /item/@group ')
+            ).focus(function () {
+                $(this).toggleClass('btn-success btn-info');}
+            ).focusout(function () {
+                $(this).toggleClass('btn-success btn-info');}
+        );
+    </script>
+
+</root><!--Context-->
+
+<!--End Check/Uncheck All With Images-->
+
+<!--Checkbox With Bootstrap Toggle-->
+<item template="checkbox" id="checkbox1" group="group1">
+      <title>Check Box Title</title>
+      <checked>true</checked>
+</item>
+
+<div>
+    <input id="/item/@id" class="/item/@group checkUncheckSingle" type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="primary">
+        <span> /item/title</span>
+    </input>
+
+    <script>
+        var id = $.trim(" /item/@id ");
+        var checked = $.trim(" /item/checked ");
+        if (checked === "true") {
+           $("#" + id).bootstrapToggle('on');
+        }
+        if (checked === "false") {
+           $("#" + id).bootstrapToggle('off');
+        }
+    </script>
+</div>
+<!--End Checkbox With Bootstrap Toggle-->
+
+
+<!--Check/Uncheck All With Bootstrap Toggle-->
+<item template="checkUncheckAll" group="group1"></item>
+
+<div class="btn-group">
+    <button type="radio" class="btn btn-info /item/@group checkAll" onclick="checkAll($.trim(' /item/@group '))">
+        <b>Check All</b>
+    </button>
+    <button type="radio" class="btn btn-info /item/@group uncheckAll" onclick="uncheckAll($.trim(' /item/@group '))">
+        <b>Uncheck All</b>
+    </button>
+
+    <script>
+        function checkAll(group) {
+            $("." + group + ".checkUncheckSingle").bootstrapToggle('on');
+        }
+        function uncheckAll(group) {
+            $("." + group + ".checkUncheckSingle").bootstrapToggle('off');
+        }
+        $("." + $.trim(' /item/@group ') + ".checkAll"
+            ).focus(function () {
+                $(this).toggleClass('btn-success btn-info');}
+            ).focusout(function () {
+                $(this).toggleClass('btn-success btn-info');}
+        );
+        $("." + $.trim(' /item/@group ') + ".uncheckAll"
+            ).focus(function () {
+                $(this).toggleClass('btn-primary btn-info');}
+            ).focusout(function () {
+                $(this).toggleClass('btn-primary btn-info');}
+        );
+    </script>
+</div>
+<!--End Check/Uncheck All With Bootstrap Toggle-->

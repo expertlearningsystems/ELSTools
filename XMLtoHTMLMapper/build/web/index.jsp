@@ -1,0 +1,176 @@
+<%-- 
+    Document   : index
+    Created on : Jun 10, 2015, 11:00:14 PM
+    Author     : skon
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="libraries/css/Template.css" rel="stylesheet" type="text/css"/>
+        <title>XML to HTML Test System</title>
+        <link href="css/main.css" rel="stylesheet">
+        <!-- Bootstrap -->
+        <link href="libraries/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet"> <!-- Just needed for Bootstrap toggle -->
+        <link href="libraries/BootstrapDatePicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css"/>    <!-- Just needed for the Bootstrap Datepicker -->
+<!--        <link href="css/buttons.css" rel="stylesheet" type="text/css"/>-->  <!-- DMW: Commented out because buttons look weird -->
+
+        <link rel="stylesheet" type="text/css" href="libraries/css/prettify.css" />
+        <script src="libraries/RGraph/libraries/RGraph.common.core.js"></script>
+        <script src="libraries/RGraph/libraries/RGraph.common.dynamic.js"></script>   <!-- Just needed for dynamic features -->
+        
+        <script src="libraries/RGraph/libraries/RGraph.common.annotate.js"></script>  <!-- Just needed for annotating -->
+        <script src="libraries/RGraph/libraries/RGraph.common.context.js"></script>   <!-- Just needed for context menus -->
+        <script src="libraries/RGraph/libraries/RGraph.common.effects.js"></script>   <!-- Just needed for visual effects -->
+        <script src="libraries/RGraph/libraries/RGraph.common.key.js"></script>       <!-- Just needed for keys -->
+        <script src="libraries/RGraph/libraries/RGraph.common.resizing.js"></script>  <!-- Just needed for resizing -->
+        <script src="libraries/RGraph/libraries/RGraph.common.tooltips.js"></script>  <!-- Just needed for tooltips -->
+        <script src="libraries/RGraph/libraries/RGraph.common.zoom.js"></script>      <!-- Just needed for zoom -->
+
+        <script src="libraries/RGraph/libraries/RGraph.drawing.background.js" type="text/javascript"></script>
+        <script src="libraries/RGraph/libraries/RGraph.drawing.rect.js" type="text/javascript"></script>
+        <script src="libraries/RGraph/libraries/RGraph.drawing.circle.js" type="text/javascript"></script>
+        <script src="libraries/RGraph/libraries/RGraph.drawing.image.js" type="text/javascript"></script>
+        <script src="libraries/RGraph/libraries/RGraph.drawing.marker1.js" type="text/javascript"></script>
+        <script src="libraries/RGraph/libraries/RGraph.drawing.marker2.js" type="text/javascript"></script>
+        <script src="libraries/RGraph/libraries/RGraph.drawing.marker3.js" type="text/javascript"></script>
+        <script src="libraries/RGraph/libraries/RGraph.drawing.poly.js" type="text/javascript"></script>
+        <script src="libraries/RGraph/libraries/RGraph.drawing.text.js" type="text/javascript"></script>
+        <script src="libraries/RGraph/libraries/RGraph.drawing.xaxis.js" type="text/javascript"></script>
+        <script src="libraries/RGraph/libraries/RGraph.drawing.yaxis.js" type="text/javascript"></script>
+        
+        <script src="libraries/RGraph/libraries/RGraph.bar.js"></script>              <!-- Just needed for Bar charts -->
+        <script src="libraries/RGraph/libraries/RGraph.bipolar.js"></script>          <!-- Just needed for Bi-polar charts -->
+        <script src="libraries/RGraph/libraries/RGraph.fuel.js"></script>             <!-- Just needed for Fuel charts -->
+        <script src="libraries/RGraph/libraries/RGraph.funnel.js"></script>           <!-- Just needed for Funnel charts -->
+        <script src="libraries/RGraph/libraries/RGraph.gantt.js"></script>            <!-- Just needed for Gantt charts -->
+        <script src="libraries/RGraph/libraries/RGraph.gauge.js"></script>            <!-- Just needed for Gauge charts -->
+        <script src="libraries/RGraph/libraries/RGraph.hbar.js"></script>             <!-- Just needed for Horizontal Bar charts -->
+        <script src="libraries/RGraph/libraries/RGraph.hprogress.js"></script>        <!-- Just needed for Horizontal Progress bars -->
+        <script src="libraries/RGraph/libraries/RGraph.line.js"></script>             <!-- Just needed for Line charts -->
+        <script src="libraries/RGraph/libraries/RGraph.meter.js"></script>            <!-- Just needed for Meter charts -->
+        <script src="libraries/RGraph/libraries/RGraph.odo.js"></script>              <!-- Just needed for Odometers -->
+        <script src="libraries/RGraph/libraries/RGraph.pie.js"></script>              <!-- Just needed for Pie AND Donut charts -->
+        <script src="libraries/RGraph/libraries/RGraph.radar.js"></script>            <!-- Just needed for Radar charts -->
+        <script src="libraries/RGraph/libraries/RGraph.rose.js"></script>             <!-- Just needed for Rose charts -->
+        <script src="libraries/RGraph/libraries/RGraph.rscatter.js"></script>         <!-- Just needed for Rscatter charts -->
+        <script src="libraries/RGraph/libraries/RGraph.scatter.js"></script>          <!-- Just needed for Scatter charts -->
+        <script src="libraries/RGraph/libraries/RGraph.thermometer.js"></script>      <!-- Just needed for Thermometer charts -->
+        <script src="libraries/RGraph/libraries/RGraph.vprogress.js"></script>        <!-- Just needed for Vertical Progress bars -->
+        <script src="libraries/RGraph/libraries/RGraph.waterfall.js"></script>        <!-- Just needed for Waterfall charts  -->
+        
+        <script src="libraries/RGraph/libraries/Custom/RGraph.target.js" type="text/javascript"></script>
+
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid areas">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+
+                    <a class="navbar-brand" href="#"><b>ELS</b></a>
+                    <h5>XML to HTML Transform Tool</h5>
+                </div>
+                <form class="navbar-form navbar-left" role="navagate">
+                <div class="btn-group">
+                <button  href="#BaseXMLCodeDiv" class="btn display btn-xs" type="checkbox" data-toggle="collapse">XML<br />Source</button>
+                <button  href="#XMLTemplateCodeDiv" class="btn display btn-xs" type="checkbox" data-toggle="collapse">XML<br />Template</button>
+                <button href="#XMLCodeDiv" class="btn display btn-xs" type="checkbox" data-toggle="collapse">XML<br />Translated</button>               
+                <button href="#TemplateCodeDiv" class="btn display btn-xs" type="checkbox" data-toggle="collapse">HTML<br />Template</button>  
+                <button href="#htmlcode" class="btn display btn-xs" btn-xs type="checkbox" data-toggle="collapse">HTML<br />Code</button>   
+                <button href="#htmldisplay" class="btn display btn-xs" type="checkbox" data-toggle="collapse">HTML<br />Display</button>   
+                
+                
+                </div>
+                    <button id="all" class="btn btn-xs" type="button" onclick="toggleAll()">All</button>   
+                </form>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+
+                <form class="navbar-form navbar-right" role="search" >
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info lookupXML btn-xs" onclick="XMLTemplateSelect($('#BaseXMLCode').val(),'XML')" >Sel XML<br />Template</button>
+                        <button type="button" class="btn btn-info translateXML btn-xs" onclick="doXMLSubmit('')">Apply XML<br />Template</button>
+                        <button type="button" class="btn btn-info lookupHTML btn-xs" onclick="XMLTemplateSelect($('#XMLCode').val(),'HTML')" >Sel HTML<br />Template</button>
+                        <button type="button" class="btn btn-info translateHTML btn-xs" onclick="doHTMLSubmit()">Apply HTML<br />Template</button>
+                        <button type="button" class="btn btn-info displayHTML btn-xs" onclick="doHTMLDisplay()">Display<br />HTML</button>
+                    </div>
+                 </form>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container">
+        <div id="TranslateMessage"></div>
+        <div class="row">
+            <div class="col-md-12">                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                
+                <div id="XMLTranslateMessage"></div>
+                
+                <div id="BaseXMLCodeDiv" class="form-group collapse">
+                    <label>Source XML</label>
+                    <textarea id="BaseXMLCode" class=" form-control  XMLText" rows="10"  ></textarea>
+                    <div id="BaseXMLMessage" class="message"></div> 
+                </div>
+                          
+                
+                <div id="XMLTemplateCodeDiv" class="form-group collapse">
+                    <label>XML Template</label> 
+                    <textarea id="XMLTemplateCode" class="form-control XMLText" rows="10" ></textarea>
+                    <div id="XMLTemplateMessage" class="message"></div>
+                </div>
+                
+
+                <div id="XMLCodeDiv" class="form-group collapse">
+                    <label>Translated XML</label>
+                    <textarea id="XMLCode" class="form-control HTMLText" rows="10"  ></textarea>
+                    <div id="XMLMessage" class="message"></div> 
+                </div>
+                
+                <div id="TemplateCodeDiv" class="form-group collapse">
+                    <label>HTML Template</label>
+                    
+                    <textarea id="TemplateCode"  class="form-control HTMLText" rows="10"></textarea>
+                    <div id="TemplateMessage" class="message"></div>
+                </div>
+                
+
+
+            </div>
+            <div class="col-md-12">  
+                <div id="htmlcode" class="collapse">
+                <label>HTML Code</label>
+                    <hr>
+                    <textarea id="HTMLOutput"  class="form-control HTMLText" rows="10"></textarea>
+                    <hr>
+                </div>
+                <div id="htmldisplay" class="collapse">
+                    <label>HTML Display</label>
+                    <hr>
+                    <div class="container-fluid" id="HTMLOutput"></div>
+                    <hr>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="libraries/js/bootstrap.min.js"></script>   
+        <script src="libraries/js/prettify.js"></script> 
+        <script src="XMLTranslate.js"></script> 
+        <script src="libraries/js/InputFilter.js" type="text/javascript"></script> <!-- Just needed for the input filter -->
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>  <!-- Just needed for Bootstrap toggle -->
+        <script src="libraries/BootstrapDatePicker/Moment.js" type="text/javascript"></script>                      <!-- Just needed for the Bootstrap Datepicker -->
+        <script src="libraries/BootstrapDatePicker/bootstrap-datepicker.min.js" type="text/javascript"></script>    <!-- Just needed for the Bootstrap Datepicker -->
+    </body>
+</html>

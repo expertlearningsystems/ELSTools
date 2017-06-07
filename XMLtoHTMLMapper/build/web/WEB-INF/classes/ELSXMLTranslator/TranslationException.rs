@@ -1,0 +1,2 @@
+ELSXMLTranslator.TranslationException
+ELSXMLTranslator.PathLookupFailure
